@@ -47,6 +47,7 @@ class RegistrationActivity : AppCompatActivity() {
         } else {
             binding.signupBtn.text = getString(R.string.loading)
             binding.signupBtn.alpha = 0.5f
+            binding.signupBtn.isEnabled = false
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if(task.isSuccessful) {
@@ -74,6 +75,7 @@ class RegistrationActivity : AppCompatActivity() {
         }
         binding.signupBtn.text = getString(R.string.sign_up)
         binding.signupBtn.alpha = 1f
+        binding.signupBtn.isEnabled = true
 
     }
 
