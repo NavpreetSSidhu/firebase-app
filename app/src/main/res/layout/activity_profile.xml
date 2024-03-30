@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="146dp"
+        android:layout_height="146dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivAvtar"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_profile_placeholder"
+            android:clickable="false"
+            tools:ignore="ContentDescription" />
+
+        <RelativeLayout
+            android:id="@+id/rlEditImage"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/accent_oval">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_camera"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarAvtar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:duplicateParentState="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/userNameRl"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/lavender"
+            android:text="User Name -"/>
+
+        <TextView
+            android:id="@+id/userNameTv"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/nameTv"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            android:text="nav23"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emailRl"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/emailTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/lavender"
+            android:text="User Email -"/>
+
+        <TextView
+            android:id="@+id/emaildetailTv"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/emailTv"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            android:text="nav@yopmail.com"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/userNameEt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_editext"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:padding="8dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:drawablePadding="8dp"
+        android:hint="Enter your name"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lavender"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Your Bio.."/>
+
+    <EditText
+        android:id="@+id/bioEt"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/custom_editext"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="top"
+        android:minLines="10"
+        android:drawablePadding="8dp"
+        android:hint="Tell us about Yourself"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/save"
+        android:background="@drawable/custom_editext"
+        android:textSize="18sp"
+        android:backgroundTint="@color/lavender"/>
+</LinearLayout>
