@@ -1,25 +1,32 @@
 package com.nav.firebaseApp
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import android.Manifest
-import android.os.Build
-import android.view.View
-import android.widget.Toast
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nav.firebaseApp.databinding.ActivityProfileBinding
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -190,7 +197,7 @@ class ProfileActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            resultLauncher.launch(intent)
+            galleryLauncher.launch(intent)
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(permission), 100)
         }
@@ -199,7 +206,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun openCamera() {
         val permissions = mutableListOf<String>()
         val storagePermission = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         else
             Manifest.permission.READ_MEDIA_IMAGES
 
@@ -214,12 +221,12 @@ class ProfileActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, permissionsToRequest, 100)
         } else {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            resultLauncher.launch(cameraIntent)
+            cameraLauncher.launch(cameraIntent)
         }
     }
 
 
-    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
             data?.let {
@@ -230,6 +237,27 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private val cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            val photo = data!!.extras!!["data"] as Bitmap?
+            selectedImageUri = getImageUri(this, photo!!)
+            loadImage(selectedImageUri!!)
+        }
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.getContentResolver(),
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 
 

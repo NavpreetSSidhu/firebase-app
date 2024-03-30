@@ -45,11 +45,12 @@ class RegistrationActivity : AppCompatActivity() {
             Toast.makeText(this,"Password cannot be empty", Toast.LENGTH_SHORT).show()
             return
         } else {
+            binding.signupBtn.text = getString(R.string.loading)
+            binding.signupBtn.alpha = 0.5f
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if(task.isSuccessful) {
-                        binding.signupBtn.text = getString(R.string.loading)
-                        binding.signupBtn.alpha = 0.5f
+
                         val user = auth.currentUser
                         val uid = user?.uid
                         val userMap = hashMapOf(
